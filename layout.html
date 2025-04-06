@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body{
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .body{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .header{
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        .header1{
+            background-color: rgb(118, 118, 31);
+            height: 50px;
+            color: #fafcfb;
+        }
+        .header2{
+            background-color: rgb(138, 7, 246);
+            height: 100px;
+            color: #fafafc;
+        }
+        .mid{
+            height: 150px;
+            width: 100%;
+        }
+        .content{
+            display: flex;
+            background-color: rgb(46, 12, 61);
+            gap: 10px;
+        }
+        .title1{
+            background-color: rgb(30, 15, 83);
+            width: 100%;
+            height: 50px;
+            margin: 0 auto;
+            color: #fcfdfd;
+            gap: 10px;
+        }
+        .news1{
+            display: flex;
+            width: 100%;
+            gap: 10px;
+        }
+        .news1 > .left{
+            display: flex;
+            height: 180px;
+            width: 100%;
+            background-color: rgb(108, 83, 220);
+            gap: 10px;
+        }
+        .news1 > .right{
+            display: flex;
+            height: 180px;
+            width: 100%;
+            gap: 10px;
+        }
+        .news1 > .right .box{
+            background-color: aqua;
+            height: 180px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .news2{
+            display: flex;
+            width: 100%;
+            gap: 10px;
+        }
+        .news2 > .left{
+            display: flex;
+            height: 180px;
+            width: 100%;
+            gap: 10px;
+        }
+        .news2 > .right{
+            display: flex;
+            height: 180px;
+            width: 100%;
+            gap: 10px;
+            background-color: rgb(108, 83, 220);
+            
+        }
+        .news2 > .left .box{
+            background-color: aqua;
+            height: 180px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .title2{
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+            gap: 10px;
+        }
+        .title2 > .left{
+            display: flex;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .title2 > .right{
+            display: flex;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .title2 >.left > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .title2 >.right > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .news3{
+            display: flex;
+            height: 320px;
+            width: 100%;
+            gap: 10px;
+        }
+        .news3 > .left{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .news3 > .left > .box{
+            height: 80px;
+            width: 100%;
+            color: #171747;
+            background-color: rgb(145, 241, 10);
+        }
+        .news3 > .right{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 100%;
+        }
+        .news3 > .right > .box{
+            height: 80px;
+            width: 100%;
+            color: #28ac21;
+            background-color: rgb(243, 197, 12);
+        }
+        .title3{
+            display: flex;
+            height: 50px;
+            margin: 0 auto;
+            width: 100%;
+            gap: 5px;
+        }
+        .title3 > .left{
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .title3 > .middle{
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .title3 > .right{
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .title3 >.left > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #1d8782;
+        }
+        .title3 >.right > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #7a2252;
+        }
+        .title3 >.middle > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #461c89;
+        }
+        .news4{
+            display: flex;
+            width: 100%;
+        }
+        .news4 > .left{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 20px;
+        }
+        .news4 > .left > .box{
+            height: 100%;
+            width: 100%;
+            background-color: rgb(145, 241, 10);
+            color: #0f2787;
+        }
+        .news4 > .right{
+            display: flex;
+            width: 100%;
+            gap: 5px;
+        }
+        .news4 > .right > .left{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+        .news4 > .right > .right{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+        .news4 > .right > .left > .box{
+            height: 80px;
+            width: 100%;
+            background-color: rgb(243, 197, 12);
+            color: #9e9423;
+        }
+        .news4 > .right > .right > .box{
+            height: 80px;
+            width: 100%;
+            background-color: rgb(243, 197, 12);
+            color: #24c935;
+        }
+        .news4 > .middle{
+            display: flex;
+            width: 100%;
+            gap: 5px;
+            color: #4414c8;
+        }
+        .bottom1{
+            height: 40px;
+            width: 100%;
+            background-color: rgb(113, 230, 152);
+            color: #589719;
+        }
+        .bottom2{
+            height: 150px;
+            width: 100%;
+            background-color: rgb(93, 133, 25);
+            color: #f30505;
+        }
+        a{
+            display: block;
+            margin-left: 0;
+        }
+        .Xfactor{
+            display: flex;
+            width: 100%;
+            gap: 5px;
+            color: #bc1e28;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header1">头</div>
+        <div class="header2">分类栏</div>
+    </div>
+    <div class="mid"></div>
+    <div class="content">
+        <div class="title1">校园要闻</div>
+    </div>
+    <div class="content">
+        <div class="news1">
+            <div class="left">1</div>
+            <div class="right">
+                <div class="box">2</div>
+                <div class="box">3</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="news2">
+            <div class="left">
+                <div class="box">4</div>
+                <div class="box">5</div>
+            </div>
+            <div class="right">6</div>
+        </div>
+    </div>
+    <hr>
+    <div class="Xfactor">
+          <a  href="www.baidu.com">更多</a>
+    </div>
+    <hr>
+    <div class="content">
+        <div class="title2">
+            <div class="left">
+                <div class="name">新闻快讯</div>
+            </div>
+            <div class="right">
+                <div class="name">媒体报道</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="news3">
+            <div class="left">
+                <div class="box">7</div>
+                <div class="box">8</div>
+                <div class="box">9</div>
+                <div class="box">10</div>
+            </div>
+            <div class="right">
+                <div class="box">11</div>
+                <div class="box">12</div>
+                <div class="box">13</div>
+                <div class="box">14</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="title3">
+            <div class="left">
+                <div class="name">科研动态</div>
+            </div>
+            <div class="middle">
+                <div class="name">精彩影像</div>
+            </div>
+            <div class="right">
+                <div class="name">专题网站</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="news4">
+            <div class="left">
+                <div class="box">101</div>
+                <div class="box">102</div>
+                <div class="box">103</div>
+                <div class="box">104</div>
+                <div class="box">105</div>
+            </div>
+            <div class="middle">9999</div>
+            <div class="right">
+                <div id="wp_news_w71"> 
+
+                    <ul class="news_list clearfix">
+                        
+                        <li class="news n1 clearfix">
+                            <a href="http://www.suibe.edu.cn/wmzx/" class="news_box" target="_blank">
+                            <div class="news_ico"></div>
+                            <div class="news_title">文明在线</div>
+                             </a>
+                            </li>
+                        
+                        <li class="news n2 clearfix">
+                            <a href="http://www.suibe.edu.cn/rsc/3652/list.htm" class="news_box" target="_blank">
+                            <div class="news_ico"></div>
+                            <div class="news_title">人才招聘</div>
+                         </a>
+                        </li>
+                        
+                        <li class="news n3 clearfix">
+                            <a href="http://lib.suibe.edu.cn/" class="news_box" target="_blank">
+                            <div class="news_ico"></div>
+                            <div class="news_title">图书馆</div>
+                            </a>
+                        </li>
+                        
+                        <li class="news n4 clearfix">
+                             <a href="http://shift.yiban.cn/" class="news_box" target="_blank">
+                              <div class="news_ico"></div>
+                              <div class="news_title">易班</div>
+                             </a>
+                        </li>
+                        
+                        <li class="news n5 clearfix">
+                                                                <a href="https://www.suibe.edu.cn/xx20da" class="news_box" target="_blank">
+                                                                <div class="news_ico"></div>
+                                                               <div class="news_title">二十大专题网</div>
+                                                            </a>
+                                                         </li>
+                        
+                        <li class="news n6 clearfix">
+                                                                <a href="http://www.suibe.edu.cn/yx/" class="news_box" target="_blank">
+                                                                <div class="news_ico"></div>
+                                                               <div class="news_title">迎新网</div>
+                                                            </a>
+                                                         </li>
+                        
+                        <li class="news n7 clearfix">
+                                                                <a href="http://www.suibe.edu.cn/museum" class="news_box" target="_blank">
+                                                                <div class="news_ico"></div>
+                                                               <div class="news_title">博物馆</div>
+                                                            </a>
+                                                         </li>
+                        
+                        <li class="news n8 clearfix">
+                                                                <a href="http://www.suibe.edu.cn/zhtb/" class="news_box" target="_blank">
+                                                                <div class="news_ico"></div>
+                                                               <div class="news_title">招标投标</div>
+                                                            </a>
+                                                         </li>
+                        
+                        <li class="news n9 clearfix">
+                                                                <a href="http://60.suibe.edu.cn/" class="news_box" target="_blank">
+                                                                <div class="news_ico"></div>
+                                                               <div class="news_title">校庆网</div>
+                                                            </a>
+                                                         </li>
+                        
+                        <li class="news n10 clearfix">
+                                                                <a href="http://www.suibe.edu.cn/xxgk/" class="news_box" target="_blank">
+                                                                <div class="news_ico"></div>
+                                                               <div class="news_title">信息公开网</div>
+                                                            </a>
+                                                         </li>
+                        
+                        <li class="news n11 clearfix">
+                                                                <a href="http://job.suibe.edu.cn/" class="news_box" target="_blank">
+                                                                <div class="news_ico"></div>
+                                                               <div class="news_title">就业服务</div>
+                                                            </a>
+                                                         </li>
+                        
+                        <li class="news n12 clearfix">
+                                                                <a href="http://www.suibe.edu.cn/langu/" class="news_box" target="_blank">
+                                                                <div class="news_ico"></div>
+                                                               <div class="news_title">语言文字</div>
+                                                            </a>
+                                                         </li>
+                        
+                    </ul>							
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom1">更多</div>
+    <div class="bottom2">这是底部</div>
+
+
+</body>
+</html>

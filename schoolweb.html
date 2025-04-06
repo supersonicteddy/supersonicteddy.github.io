@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,bady{
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .body{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .header{
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        .header1{
+            background-color: rgb(31, 36, 118);
+            height: 50px;
+            color: #fcfafa;
+        }
+        .header2{
+            background-color: rgb(234, 246, 7);
+            height: 100px;
+            color: #fcfafa;
+        }
+        .mid{
+            height: 150px;
+            width: 100%;
+        }
+        .content{
+            display: flex;
+            background-color: aliceblue;
+            gap: 10px;
+        }
+        .title1{
+            background-color: rgb(222, 38, 87);
+            width: 100%;
+            height: 50px;
+            margin: 0 auto;
+            color: #fcfdfd;
+            gap: 10px;
+        }
+        .news1{
+            display: flex;
+            width: 100%;
+            gap: 10px;
+        }
+        .news1 > .left{
+            display: flex;
+            height: 180px;
+            width: 100%;
+            background-color: rgb(108, 83, 220);
+            gap: 10px;
+        }
+        .news1 > .right{
+            display: flex;
+            height: 180px;
+            width: 100%;
+            gap: 10px;
+        }
+        .news1 > .right .box{
+            background-color: aqua;
+            height: 180px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .news2{
+            display: flex;
+            width: 100%;
+            gap: 10px;
+        }
+        .news2 > .left{
+            display: flex;
+            height: 180px;
+            width: 100%;
+            gap: 10px;
+        }
+        .news2 > .right{
+            display: flex;
+            height: 180px;
+            width: 100%;
+            gap: 10px;
+            background-color: rgb(108, 83, 220);
+            
+        }
+        .news2 > .left .box{
+            background-color: aqua;
+            height: 180px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .title2{
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+            gap: 10px;
+        }
+        .title2 > .left{
+            display: flex;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .title2 > .right{
+            display: flex;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .title2 >.left > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .title2 >.right > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .news3{
+            display: flex;
+            height: 320px;
+            width: 100%;
+            gap: 10px;
+        }
+        .news3 > .left{
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .news3 > .left > .box{
+            height: 80px;
+            width: 100%;
+            color: #0f0f0f;
+            background-color: rgb(145, 241, 10);
+        }
+        .news3 > .right{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 100%;
+        }
+        .news3 > .right > .box{
+            height: 80px;
+            width: 100%;
+            color: #0f0f0f;
+            background-color: rgb(243, 197, 12);
+        }
+        .title3{
+            display: flex;
+            height: 50px;
+            margin: 0 auto;
+            width: 100%;
+            gap: 5px;
+        }
+        .title3 > .left{
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .title3 > .middle{
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .title3 > .right{
+            display: flex;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .title3 >.left > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .title3 >.right > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .title3 >.middle > .name{
+            margin: 0 auto;
+            background-color: rgb(222, 38, 87);
+            height: 50px;
+            width: 100%;
+            color: #0f0f0f;
+        }
+        .news4{
+            display: flex;
+            width: 100%;
+        }
+        .news4 > .left{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 20px;
+        }
+        .news4 > .left > .box{
+            height: 100%;
+            width: 100%;
+            background-color: rgb(145, 241, 10);
+            color: #0f0f0f;
+        }
+        .news4 > .right{
+            display: flex;
+            width: 100%;
+            gap: 5px;
+        }
+        .news4 > .right > .left{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+        .news4 > .right > .right{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+        }
+        .news4 > .right > .left > .box{
+            height: 80px;
+            width: 100%;
+            background-color: rgb(243, 197, 12);
+            color: #0f0f0f;
+        }
+        .news4 > .right > .right > .box{
+            height: 80px;
+            width: 100%;
+            background-color: rgb(243, 197, 12);
+            color: #0f0f0f;
+        }
+        .news4 > .middle{
+            display: flex;
+            width: 100%;
+            gap: 5px;
+            color: #0f0f0f;
+        }
+        .bottom1{
+            height: 40px;
+            width: 100%;
+            background-color: rgb(113, 230, 152);
+            color: #0f0f0f;
+        }
+        .bottom2{
+            height: 150px;
+            width: 100%;
+            background-color: rgb(25, 47, 133);
+            color: #f30505;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header1">这里是菜单栏</div>
+        <div class="header2">这里也是菜单栏</div>
+    </div>
+    <div class="mid"></div>
+    <div class="content">
+        <div class="title1">校园要闻</div>
+    </div>
+    <div class="content">
+        <div class="news1">
+            <div class="left">这是一个带图片的一条校园要闻</div>
+            <div class="right">
+                <div class="box">这是一条校园要闻</div>
+                <div class="box">这是一条校园要闻</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="news2">
+            <div class="left">
+                <div class="box">这是一条校园要闻</div>
+                <div class="box">这是一条校园要闻</div>
+            </div>
+            <div class="right">这是一条带图片的校园要闻</div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="title2">
+            <div class="left">
+                <div class="name">新闻快讯</div>
+            </div>
+            <div class="right">
+                <div class="name">媒体报道</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="news3">
+            <div class="left">
+                <div class="box">这是一条新闻快讯</div>
+                <div class="box">这是一条新闻快讯</div>
+                <div class="box">这是一条新闻快讯</div>
+                <div class="box">这是一条新闻快讯</div>
+            </div>
+            <div class="right">
+                <div class="box">这是一条媒体报道</div>
+                <div class="box">这是一条媒体报道</div>
+                <div class="box">这是一条媒体报道</div>
+                <div class="box">这是一条媒体报道</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="title3">
+            <div class="left">
+                <div class="name">科研动态</div>
+            </div>
+            <div class="middle">
+                <div class="name">精彩影像</div>
+            </div>
+            <div class="right">
+                <div class="name">专题网站</div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="news4">
+            <div class="left">
+                <div class="box">这是一条科研动态</div>
+                <div class="box">这是一条科研动态</div>
+                <div class="box">这是一条科研动态</div>
+                <div class="box">这是一条科研动态</div>
+                <div class="box">这是一条科研动态</div>
+            </div>
+            <div class="middle">这是一个精彩影像</div>
+            <div class="right">
+                <div class="left">
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                </div>
+                <div class="right">
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                    <div class="box">这是一条专题网站</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom1">更多</div>
+    <div class="bottom2">这是底部</div>
+
+
+</body>
+</html>
