@@ -10,12 +10,32 @@
     <img src="微信图片_20250406162120.jpg" alt="" width="200px">
     <hr>
     <a href="introduce.html">个人简介</a>
-    div{
-        transition: 0.5s;
-        }
-        div:hover{
-        width:300px;
-        }
         <a href="layout.html">网页布局</a>    
+    <hr>
+    <div id="currentTime"></div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            
+            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const weekday = weekdays[now.getDay()];
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('currentTime').textContent = 
+                `今天是${year}年${month}月${day}日 ${weekday} ${hours}:${minutes}:${seconds}`;
+        }
+
+        // 初始加载
+        updateTime();
+        // 每秒更新一次
+        setInterval(updateTime, 1000);
+    </script>
 </body>
 </html>
