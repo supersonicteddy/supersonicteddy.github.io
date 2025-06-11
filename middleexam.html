@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唐诗的个人简历</title>
+    <style>
+        :root {
+            --primary-color: #d98314;
+            --secondary-color: #2414b2;
+            --accent-color: #a1035d;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--card-shadow);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+        
+        h2 {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            margin: 1.5rem 0;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+        }
+        
+        h2:hover::after {
+            animation: shine 1.5s infinite;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.5s ease forwards;
+        }
+        
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        
+        ol, ul {
+            padding-left: 2rem;
+        }
+        
+        li {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-left: 3px solid var(--primary-color);
+            transition: all 0.3s;
+        }
+        
+        li:hover {
+            background-color: rgba(209, 131, 20, 0.1);
+            transform: translateX(5px);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: rgba(209, 131, 20, 0.1);
+        }
+        
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            margin: 2rem 0;
+        }
+        
+        .cta-button {
+            display: block;
+            text-align: center;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(36, 20, 178, 0.3);
+            max-width: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(36, 20, 178, 0.4);
+        }
+        
+        .cta-button:active {
+            transform: translateY(1px);
+        }
+        
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .cta-button:hover::after {
+            animation: shine 1.5s infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes shine {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .profile-img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+                padding: 0.6rem 1rem;
+            }
+            
+            .section {
+                padding: 1rem;
+            }
+            
+            ol, ul {
+                padding-left: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="唐诗310115200505145213.jpg.jpg" alt="唐诗" class="profile-img">
+            <h2>唐诗的个人简历</h2>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="section">
+            <h1>个人简介</h1>
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <img src="唐诗310115200505145213.jpg.jpg" alt="唐诗" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            </div>
+            <ol>
+                <li>身高: 183cm</li>
+                <li>体重: 79kg</li>
+                <li>电话: 13761445046</li>
+                <li>生日: 2005年5月14日</li>
+                <li>性别: 男</li> 
+            </ol>
+        </section>
+        
+        <section class="section">
+            <h2>教育背景</h2>
+            <table>
+                <tr>
+                    <th>时间</th>
+                    <th>学校</th>
+                    <th>职务</th>   
+                </tr>
+                <tr>
+                    <td>2016-2020</td>
+                    <td>上海市东沟中学</td>
+                    <td>班长</td>
+                </tr>
+                <tr>
+                    <td>2020-2023</td>
+                    <td>上海师范大学附属中学</td>
+                    <td>化学课代表</td>
+                </tr>
+                <tr>
+                    <td>2023-现在</td>
+                    <td>上海对外经贸大学</td>
+                    <td>生活委员</td>
+                </tr>
+            </table>
+        </section>
+        
+        <section class="section">
+            <h2>工作经验</h2>
+            <ol>
+                <li>甲鱼班级成员</li>
+                <li>数学建模大赛参与者</li>
+                <li>在王者峡谷驰骋</li>
+                <li>红色纪念地的志愿者</li>
+                <li>2024校杰出志愿者</li>
+            </ol>
+        </section>
+        
+        <a href="form.html" class="cta-button">了解更多信息</a>
+    </div>
+</body>
+</html>
