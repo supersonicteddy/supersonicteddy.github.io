@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交互式饼图</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+        
+        .pie-chart {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+        
+        .segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+            left: 0;
+            top: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid white;
+            box-sizing: border-box;
+        }
+        
+        .segment:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .legend-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .legend-label {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 100;
+            white-space: nowrap;
+        }
+        
+        .info {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>家庭月度支出分析</h1>
+    
+    <div class="chart-container">
+        <div class="pie-chart" id="pieChart"></div>
+        <div class="tooltip" id="tooltip"></div>
+    </div>
+    
+    <div class="legend" id="legend"></div>
+    
+    <p class="info">鼠标悬停在扇形或图例上查看详细信息</p>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 饼图数据
+            const data = [
+                { label: '食品餐饮', value: 35, color: '#FF6384' },
+                { label: '住房贷款', value: 25, color: '#36A2EB' },
+                { label: '交通出行', value: 20, color: '#FFCE56' },
+                { label: '娱乐休闲', value: 15, color: '#4BC0C0' },
+                { label: '医疗健康', value: 5, color: '#9966FF' }
+            ];
+
+            const pieChart = document.getElementById('pieChart');
+            const legend = document.getElementById('legend');
+            const tooltip = document.getElementById('tooltip');
+            
+            let cumulativeAngle = 0;
+            const total = data.reduce((sum, item) => sum + item.value, 0);
+            
+            // 创建饼图扇形
+            data.forEach((item, index) => {
+                const percentage = item.value / total;
+                const angle = percentage * 360;
+                
+                const segment = document.createElement('div');
+                segment.className = 'segment';
+                segment.style.backgroundColor = item.color;
+                
+                // 关键修复：正确的角度计算和变换
+                const rotateAngle = cumulativeAngle;
+                const skewAngle = angle <= 180 ? 90 - angle : angle - 90;
+                
+                segment.style.transform = `rotate(${rotateAngle}deg) skewY(${skewAngle}deg)`;
+                
+                // 处理大于180度的扇形
+                if (angle > 180) {
+                    segment.style.clipPath = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)';
+                }
+                
+                // 鼠标悬停事件
+                segment.addEventListener('mouseenter', function() {
+                    tooltip.textContent = `${item.label}: ${item.value}%`;
+                    tooltip.style.opacity = '1';
+                    this.style.zIndex = '10';
+                });
+                
+                segment.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = `${e.pageX + 15}px`;
+                    tooltip.style.top = `${e.pageY + 15}px`;
+                });
+                
+                segment.addEventListener('mouseleave', function() {
+                    tooltip.style.opacity = '0';
+                    this.style.zIndex = '1';
+                });
+                
+                pieChart.appendChild(segment);
+                cumulativeAngle += angle;
+                
+                // 创建图例
+                const legendItem = document.createElement('div');
+                legendItem.className = 'legend-item';
+                legendItem.dataset.index = index;
+                
+                const legendColor = document.createElement('div');
+                legendColor.className = 'legend-color';
+                legendColor.style.backgroundColor = item.color;
+                
+                const legendLabel = document.createElement('span');
+                legendLabel.className = 'legend-label';
+                legendLabel.textContent = `${item.label} (${item.value}%)`;
+                
+                legendItem.appendChild(legendColor);
+                legendItem.appendChild(legendLabel);
+                legend.appendChild(legendItem);
+                
+                // 图例悬停时高亮对应的扇形
+                legendItem.addEventListener('mouseenter', function() {
+                    const segments = document.querySelectorAll('.segment');
+                    const segment = segments[index];
+                    const currentTransform = segment.style.transform;
+                    segment.style.transform = `${currentTransform} scale(1.1)`;
+                    segment.style.zIndex = '10';
+                    segment.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.3)';
+                    
+                    tooltip.textContent = `${item.label}: ${item.value}%`;
+                    tooltip.style.opacity = '1';
+                });
+                
+                legendItem.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = `${e.pageX + 15}px`;
+                    tooltip.style.top = `${e.pageY + 15}px`;
+                });
+                
+                legendItem.addEventListener('mouseleave', function() {
+                    const segments = document.querySelectorAll('.segment');
+                    const segment = segments[index];
+                    segment.style.transform = segment.style.transform.replace(' scale(1.1)', '');
+                    segment.style.zIndex = '1';
+                    segment.style.boxShadow = 'none';
+                    
+                    tooltip.style.opacity = '0';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
