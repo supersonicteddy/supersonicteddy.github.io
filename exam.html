@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地图片切换演示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .image-container {
+            width: 600px;
+            height: 400px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .auto-toggle {
+            background-color: #f39c12;
+        }
+        
+        .auto-toggle:hover {
+            background-color: #e67e22;
+        }
+        
+        .auto-toggle.off {
+            background-color: #95a5a6;
+        }
+        
+        .auto-toggle.off:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>本地图片切换演示</h1>
+    
+    <div class="image-container">
+        <img id="slideshow-image" src="" alt="幻灯片图片">
+        <div class="caption" id="image-caption"></div>
+    </div>
+    
+    <div class="controls">
+        <button id="prev-btn">上一张</button>
+        <button id="next-btn">下一张</button>
+        <button id="auto-toggle" class="auto-toggle">暂停自动切换</button>
+    </div>
+    
+    <script>
+        // 图片数组，使用本地文件名
+        const images = [
+            {
+                url: "周大鹏.jpg",
+                caption: "周大鹏"
+            },
+            {
+                url: "刘轩旎.jpg",
+                caption: "刘轩旎"
+            },
+            {
+                url: "唐诗.jpg",
+                caption: "唐诗"
+            },
+            {
+                url: "甲鱼.png",
+                caption: "甲鱼"
+            }
+        ];
+        
+        // 获取DOM元素
+        const slideshowImage = document.getElementById('slideshow-image');
+        const imageCaption = document.getElementById('image-caption');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const autoToggleBtn = document.getElementById('auto-toggle');
+        
+        // 初始化变量
+        let currentIndex = 0;
+        let autoChangeInterval;
+        let isAutoChangeEnabled = true;
+        const changeInterval = 3000; // 3秒切换一次
+        
+        // 初始化幻灯片
+        function initSlideshow() {
+            if (images.length > 0) {
+                updateImage();
+                startAutoChange();
+            }
+        }
+        
+        // 更新当前显示的图片
+        function updateImage() {
+            slideshowImage.src = images[currentIndex].url;
+            imageCaption.textContent = images[currentIndex].caption;
+        }
+        
+        // 切换到下一张图片
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateImage();
+        }
+        
+        // 切换到上一张图片
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateImage();
+        }
+        
+        // 开始自动切换
+        function startAutoChange() {
+            if (autoChangeInterval) {
+                clearInterval(autoChangeInterval);
+            }
+            autoChangeInterval = setInterval(nextImage, changeInterval);
+            isAutoChangeEnabled = true;
+            autoToggleBtn.textContent = "暂停自动切换";
+            autoToggleBtn.classList.remove("off");
+        }
+        
+        // 停止自动切换
+        function stopAutoChange() {
+            if (autoChangeInterval) {
+                clearInterval(autoChangeInterval);
+                autoChangeInterval = null;
+            }
+            isAutoChangeEnabled = false;
+            autoToggleBtn.textContent = "开始自动切换";
+            autoToggleBtn.classList.add("off");
+        }
+        
+        // 切换自动播放状态
+        function toggleAutoChange() {
+            if (isAutoChangeEnabled) {
+                stopAutoChange();
+            } else {
+                startAutoChange();
+            }
+        }
+        
+        // 事件监听
+        nextBtn.addEventListener('click', () => {
+            nextImage();
+            if (isAutoChangeEnabled) {
+                // 手动切换时重置自动切换计时器
+                stopAutoChange();
+                startAutoChange();
+            }
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            prevImage();
+            if (isAutoChangeEnabled) {
+                // 手动切换时重置自动切换计时器
+                stopAutoChange();
+                startAutoChange();
+            }
+        });
+        
+        autoToggleBtn.addEventListener('click', toggleAutoChange);
+        
+        // 初始化
+        initSlideshow();
+    </script>
+</body>
+</html>
